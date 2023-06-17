@@ -1,3 +1,6 @@
+import { configenv } from '@configs/configEnvs';
+import bcrypt from 'bcryptjs';
+
 export class Generators {
 
   //Configuramos para que la primera letra sea mayusculas de cualquier caracter.
@@ -32,6 +35,10 @@ export class Generators {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));     
     }
     return parseInt(result, 10);
+  }
+
+  static hash(password: string): Promise<string> { // el hash lo que regresa es un apromesa
+    return bcrypt.hash(password, Number(configenv.SALT_ROUND)); // Es importante destacar que a Number se pasa el parametro salt_round.
   }
 
 }
