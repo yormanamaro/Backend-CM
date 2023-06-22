@@ -39,7 +39,7 @@
       "@configs/*":["src/configs/*"],
       "@auth/*":["src/features/auth/*"],
       "@patient/*":["src/features/patient/*"],
-      "@interfaces/*":["src/interfaces/http/*"],
+      "@interfaces/*":["src/interfaces/*"],
       "@root/*":["src/*"]
     }
   },

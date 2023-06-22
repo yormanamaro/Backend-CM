@@ -11,6 +11,7 @@ class Config {
   public SECRET_KEY_TWO: string | undefined;
   public SERVER_PORT: string | undefined;
   public SALT_ROUND: string | undefined;
+  public BASE_PATH: string | undefined;
 
   constructor() {
     this.DATABASE_URL = process.env.DATABASE_URL;
@@ -21,6 +22,7 @@ class Config {
     this.SECRET_KEY_TWO = process.env.SECRET_KEY_TWO;
     this.SERVER_PORT = process.env.SERVER_PORT;
     this.SALT_ROUND = process.env.SALT_ROUND;
+    this.BASE_PATH = process.env.BASE_PATH;
   }
   
 

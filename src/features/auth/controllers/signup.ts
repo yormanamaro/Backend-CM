@@ -3,18 +3,15 @@ import { Request, Response } from 'express';
 import { joiValidation } from '@decorator/joi-validation';
 import { signupSchema } from '@auth/schemas/signup';
 import { IAuthDocument } from '@auth/interfaces/auth.interface';
-import { ISignUpData } from '@auth/interfaces/auth.interface';
 import { authService } from '@services/db/auth.service';
 import { Generators } from '@helpers/generators/generators';
 import { BadRequesError } from '@helpers/errors/badRequesError';
 import HTTP_STATUS from 'http-status-codes';
-import JWT from 'jsonwebtoken';
-import { configenv } from '@configs/configEnvs';
+import { SignUpUtility } from './utilities/signup.utility';
 
 
-export class SignUp {
+export class SignUp extends SignUpUtility {
   
-
   @joiValidation(signupSchema) // Esto es para validar los datos antes de que se envien.
   public async create(req: Request, res: Response): Promise<void> {
     const { username, email, password, avatarColor } = req.body; // para poderme autenticar por primera vez.
@@ -49,56 +46,4 @@ export class SignUp {
     .json({ message: 'Created', user: userObjectId, token: userJwt});
 
   }
-
-  private signToken(data: IAuthDocument, userObjectId: ObjectId): string {
-    return JWT.sign(
-      {
-        userId: userObjectId,
-        email: data.email,
-        username: data.username,
-        avatarColor: data.avatarColor
-      },
-      configenv.JWT_TOKEN!
-    );
-  }
-
-  private signUpData(data: ISignUpData): IAuthDocument{
-    const { _id, username, email, password, avatarColor } = data;
-    return { 
-      _id,
-      username: Generators.firstLetterUpperCase(username),
-      email: Generators.lowercase(email),
-      password, 
-      avatarColor,
-      createdAt: new Date()
-    } as IAuthDocument;
-  }
-
-  /* esta abstraccion es solo para redis con manejo de cache (no se usa en el proyecto)
-  private userData(data: IAuthDocument, userObjectId: ObjectId): IPatientDocument {
-    const { _id, username, email, password, avatarColor } = data;
-    return {
-      _id: userObjectId,
-      authId: _id,
-      username: Generators.firstLetterUpperCase(username),
-      email,
-      password,
-      avatarColor,
-      work: '',
-      location: '',
-      school: '',
-      quote: '',
-      postCount: 0,
-      notification: {
-        message: true,
-        reactions: true,
-        comments: true
-      },
-      social: {
-        facebook: '',
-        instagram: '',
-        twitter: ''
-      }
-    } as unknown as IPatientDocument;
-  }*/
 }

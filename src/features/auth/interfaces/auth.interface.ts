@@ -15,7 +15,7 @@ export interface AuthPayload { // estructura de respuesta con autenticacion.
   userId: string;
   email: string;
   username: string;
-  avatarcolor: string;
+  avatarColor: string;
   iat?: number; // tiempo de expiracion token.
 }
 

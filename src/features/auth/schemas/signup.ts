@@ -18,7 +18,10 @@ const signupSchema: ObjectSchema = Joi.object().keys({
     'string.base': 'ALERT email invalid value',
     'string.email': 'ALERT email us not allowed',
     'string.empty': 'ALERT email is a required field',
-  }),   
+  }),
+  avatarColor: Joi.string().required().messages({
+    'any.required': 'Avatar color ir required',
+  }),  
 });
 
 export { signupSchema };

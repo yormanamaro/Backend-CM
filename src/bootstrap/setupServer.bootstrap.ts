@@ -12,6 +12,7 @@ import Logger from 'bunyan';
 import HTTP_STATUS from 'http-status-codes';
 import { IErrorResponse } from '@helpers/errors/errorResponse.interface';
 import { CustonError } from '@helpers/errors/customError';
+import applicationRoutes from '@interfaces/http/routes';
 
 
 const log: Logger = logger.createLogger('server'); // Se crea la definicion del log.
@@ -29,6 +30,7 @@ export class CmvServer {
     // Para correr procesos
     this.securityMiddleware(this.app);
     this.standardMiddleware(this.app);
+    this.routesMiddleware(this.app);
     this.globalErrorCMBackend(this.app);
     this.startServer(this.app);
   }
@@ -53,6 +55,10 @@ export class CmvServer {
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
       })
     );
+  }
+
+  private routesMiddleware(app: Application): void {
+    applicationRoutes(app);
   }
 
   private standardMiddleware(app: Application): void {
