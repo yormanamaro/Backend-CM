@@ -1,0 +1,1 @@
+//import { IPatientDocument } from '@patient/interfaces/patientDocument.interface';

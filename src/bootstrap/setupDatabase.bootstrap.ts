@@ -3,9 +3,9 @@ import { configenv } from '@configs/configEnvs';
 import Logger from 'bunyan';
 import { logger } from '@configs/configLogs';
 
-const log: Logger = logger.createLogger('setupDatabase'); // se crea la definicion del lo
+const log: Logger = logger.createLogger('setupDatabase'); 
 
-// Desing Pattern Singleton https://refactoring.guru/design-patterns/singleton
+//  PATTERN DESING: SINGLETON (Ya que nunca va a cambiar su comportamiento inicial)
 export default () => {
   const connect = () => {
     mongoose
@@ -15,7 +15,7 @@ export default () => {
       })
       .catch(error => {
         log.error('Error connecting to database at CM-Vidal', error);
-        return process.exit(1); // para no dejar el proceso colgado
+        return process.exit(1);
       });
   };
   connect();

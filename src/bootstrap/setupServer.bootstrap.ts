@@ -15,19 +15,19 @@ import { CustonError } from '@helpers/errors/customError';
 import applicationRoutes from '@interfaces/http/routes';
 
 
-const log: Logger = logger.createLogger('server'); // Se crea la definicion del log.
+const log: Logger = logger.createLogger('server');
 
 
 export class CmvServer {
   private app: Application;
 
   constructor(app: Application) {
-    // aqui la inicializamos
     this.app = app;
   }
 
   public start(): void {
-    // Para correr procesos
+
+    //  PATTERN DESING: CHAIN OF RESPONSABILITUY (Especificar cadenas de comportamientos que pueda tener esa ruta)
     this.securityMiddleware(this.app);
     this.standardMiddleware(this.app);
     this.routesMiddleware(this.app);
@@ -36,12 +36,11 @@ export class CmvServer {
   }
 
   private securityMiddleware(app: Application): void {
-    // Complemento funciones a los procesos de seguridad
     app.use(
       cookieSession({
         name: 'session',
         keys: [configenv.SECRET_KEY_ONE!, configenv.SECRET_KEY_TWO!],
-        maxAge: 14 * 24 * 60 * 60 * 1000, // 2 semnas
+        maxAge: 14 * 24 * 60 * 60 * 1000, 
         secure: configenv.NODE_ENV !== 'development'
       })
     );
@@ -50,7 +49,7 @@ export class CmvServer {
     app.use(
       cors({
         origin: configenv.CLIENT_URL,
-        credentials: true, // para que se puedan propagar sin problemas
+        credentials: true,
         optionsSuccessStatus: 200,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
       })
@@ -62,19 +61,17 @@ export class CmvServer {
   }
 
   private standardMiddleware(app: Application): void {
-    // definiciones estandares/generales
     app.use(compression());
     app.use(json({ limit: '60mb' }));
-    app.use(urlencoded({ extended: true, limit: '60mb' })); // para habilitar la trasformacion a json
+    app.use(urlencoded({ extended: true, limit: '60mb' }));
   }
 
 
-  private globalErrorCMBackend(app: Application): void { // Manejo de errores en el server
-    // para todas las rutas que no sean las que tenemos en la app.
+  private globalErrorCMBackend(app: Application): void {
     app.all('*', (req: Request, res: Response ) => {
       res.status(HTTP_STATUS.NOT_FOUND).json({ message: `${req.originalUrl} not found`});
     });
-    // para las que si tenemos en la app.
+ 
     app.use((error: IErrorResponse, _: Request, res: Response, next: NextFunction) => {
       log.error(error);
       if (error instanceof CustonError) {
@@ -85,7 +82,6 @@ export class CmvServer {
   };
 
   private async startServer(app: Application): Promise<void> {
-    // para hacer iun start server con http
     try {
       const httpServer: http.Server = new http.Server(app);
       this.startHttpServer(httpServer);
@@ -95,7 +91,6 @@ export class CmvServer {
   }
 
   private startHttpServer(httpServer: http.Server): void {
-    // crear instancias de servicios
     log.info(`Server has started with process ${process.pid}`);
     const PORT = Number(configenv.SERVER_PORT);
     httpServer.listen(PORT, () => {

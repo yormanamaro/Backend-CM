@@ -9,7 +9,8 @@
     "lint:check": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "prettier:check": "prettier --check src/**/*.{ts}",
-    "prettier:fix": "prettier --write src/**/*.{ts}"
+    "prettier:fix": "prettier --write src/**/*.{ts}",
+    "test": "jest --coverage=true -w=1 --forceExit --detectOpenHandles --watchAll=false"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,3 @@
-// Para validar los datos de una respuesta y sean enviados de forma correcta.
-
 import { JoiRequestValidateError } from '@helpers/errors/joiValidateError';
 import { Request } from 'express';
 import { ObjectSchema } from 'joi';

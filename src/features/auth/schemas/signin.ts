@@ -1,4 +1,3 @@
-// Schema de validacion para cuando ya se inicia la secion
 import Joi, {ObjectSchema} from 'joi';
 
 const loginSchema: ObjectSchema = Joi.object().keys({

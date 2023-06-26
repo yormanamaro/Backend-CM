@@ -1,4 +1,3 @@
-// Para saber si la contrasena hace mach para fonfirmar esta contrasena.
 import Joi, {ObjectSchema} from 'joi';
 
 const emailSchema: ObjectSchema = Joi.object().keys({

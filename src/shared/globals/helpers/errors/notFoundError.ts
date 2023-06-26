@@ -1,5 +1,3 @@
-// Error que se ve cuando no se encuentra la ruta.
-
 import HTTP_STATUS from 'http-status-codes';
 import { CustonError } from './customError';
 

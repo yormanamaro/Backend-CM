@@ -1,4 +1,3 @@
-// para el inicio de secion
 import { Request, Response } from 'express';
 import { configenv } from '@configs/configEnvs';
 import JWT from 'jsonwebtoken';

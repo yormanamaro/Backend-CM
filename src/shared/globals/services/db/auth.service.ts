@@ -2,13 +2,15 @@ import { IAuthDocument } from '@auth/interfaces/auth.interface';
 import { AuthModel } from '@auth/models/auth.schema';
 import { Generators } from '@helpers/generators/generators';
 
+// SOLID PRINCIPLE: OPEN/CLOSE, SINGLE RESPONSABILITY (Permite hacer extenson de la clase en cuanto a sus funcionalidades y cerrada en cuanto a lo que ya se habia definido previamente)
+// SOLID PRINCIPLE: SINGLE RESPONSABILITY (Ya que tiene solamente un objetivo)
 class AuthService {
 
-  public async createAuthUser(data: IAuthDocument): Promise<void> { // Esquema de authuser. 
-    await AuthModel.create(data); // para guardar la data en mongo.
+  public async createAuthUser(data: IAuthDocument): Promise<void> {  
+    await AuthModel.create(data); 
   }
 
-  public async getUserByUsernameOrEmail(username: string, email: string): Promise<IAuthDocument> { // para casos en el controlador que se necesite identificar al usuario primero.
+  public async getUserByUsernameOrEmail(username: string, email: string): Promise<IAuthDocument> {
     const query = {
       $or: [{ username: Generators.firstLetterUpperCase(username)}, {email: Generators.lowercase(email) }]
     };

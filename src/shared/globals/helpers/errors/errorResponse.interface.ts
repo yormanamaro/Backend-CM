@@ -1,6 +1,6 @@
 import { IError } from './error.interface';
 
-// Pincipio solid: Principio de responsabilidad unica.
+// SOLID PRINCIPLE: PREINCIPIO DE RESPONSABILIDAD UNICA.
 export interface IErrorResponse {
   message: string;
   statusCode: number;

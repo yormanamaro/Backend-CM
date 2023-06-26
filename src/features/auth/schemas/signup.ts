@@ -1,4 +1,3 @@
-// para cuando un paciente se registre.
 import Joi, {ObjectSchema} from 'joi';
 
 const signupSchema: ObjectSchema = Joi.object().keys({

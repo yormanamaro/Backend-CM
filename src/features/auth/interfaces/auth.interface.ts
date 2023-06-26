@@ -1,4 +1,3 @@
-// interface de autenticacion.
 import { Document } from 'mongoose';
 import { ObjectId } from 'mongodb';
 import { IPatientDocument } from '@patient/interfaces/patientDocument.interface';
@@ -11,15 +10,15 @@ declare global {
   }
 }
 
-export interface AuthPayload { // estructura de respuesta con autenticacion.
+export interface AuthPayload {
   userId: string;
   email: string;
   username: string;
   avatarColor: string;
-  iat?: number; // tiempo de expiracion token.
+  iat?: number;
 }
 
-export interface IAuthDocument extends Document { // molde que se va a completar con el documento del scherma.
+export interface IAuthDocument extends Document {
   _id: string | ObjectId;
   username: string;
   email: string;
@@ -27,10 +26,10 @@ export interface IAuthDocument extends Document { // molde que se va a completar
   avatarColor: string;
   createdAt: Date;
   comparePassword: (password: string) => Promise<boolean>;
-  hashPassword: (password: string) => Promise<string>; // firma para comprar
+  hashPassword: (password: string) => Promise<string>;
 }
 
-export interface ISignUpData { // para el registro de usuario
+export interface ISignUpData { 
   _id: ObjectId;
   email: string;
   username: string;
@@ -38,6 +37,6 @@ export interface ISignUpData { // para el registro de usuario
   avatarColor: string;
 }
 
-export interface IAuthJob { // para disponibilizar el tema de los workers ojo que no va.
+export interface IAuthJob {
   value?: string | IPatientDocument | IAuthDocument;
 }

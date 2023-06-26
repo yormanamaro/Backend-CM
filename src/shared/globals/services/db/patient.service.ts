@@ -2,8 +2,8 @@ import { IPatientDocument } from '@patient/interfaces/patientDocument.interface'
 import { UserModel } from '@patient/models/patient.schema';
 import mongoose from 'mongoose';
 
-// PRINCIPIO SOLID OPEN/CLOSE.
 
+// SOLID PRINCIPLE: OPEN/CLOSE, SINGLE RESPONSABILITY (Permite hacer extenson de la clase en cuanto a sus funcionalidades y cerrada en cuanto a lo que ya se habia definido previamente)
 class UserService {
 
   public async addUserData(data: IPatientDocument): Promise<void> {

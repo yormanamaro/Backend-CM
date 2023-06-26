@@ -10,8 +10,10 @@ class AuthRoutes {
     this.router = express.Router();
   }
 
-  public routes(): Router { // aqui vamos a construir todas nuestras rutas hijas.
+  public routes(): Router {
 
+    // PATTERN DESING: CHAIN OF RESPONSABILITUY (Especificar cadenas de comportamientos que pueda tener esa ruta)
+    // PATTERN DESING: PROTOTYPE (Permite especificar el contexto de ejecucion de un build)
     this.router.post('/signup', SignUp.prototype.create);
     this.router.post('/signin', SignIn.prototype.read);
 

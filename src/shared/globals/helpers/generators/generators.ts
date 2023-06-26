@@ -3,7 +3,6 @@ import bcrypt from 'bcryptjs';
 
 export class Generators {
 
-  //Configuramos para que la primera letra sea mayusculas de cualquier caracter.
   static firstLetterUpperCase(str: string): string {
     const valueString = str.toLowerCase();
     return valueString
@@ -12,12 +11,10 @@ export class Generators {
     .join(' ');
   }
 
-  // Esta para que sean minusculas.
   static lowercase(str: string): string {
     return str.toLowerCase();
   }
 
-  // para parsear a json (para redis)
   static parseJson(prop: string): unknown {
     try {
       JSON.parse(prop);
@@ -26,7 +23,6 @@ export class Generators {
     }
   }
 
-  // Para generar identificadores de forma dinamica.
   static dinamicGenerateRandom(integerLength: number): number {
     const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let result = ' ';
@@ -37,8 +33,8 @@ export class Generators {
     return parseInt(result, 10);
   }
 
-  static hash(password: string): Promise<string> { // el hash lo que regresa es un apromesa
-    return bcrypt.hash(password, Number(configenv.SALT_ROUND)); // Es importante destacar que a Number se pasa el parametro salt_round.
+  static hash(password: string): Promise<string> { 
+    return bcrypt.hash(password, Number(configenv.SALT_ROUND));
   }
 
 }

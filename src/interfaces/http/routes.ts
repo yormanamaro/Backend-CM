@@ -3,9 +3,9 @@ import { authRoutes } from '@auth/routes/AuthRoutes';
 import { configenv } from '@configs/configEnvs';
 
 
-//const BASE_PATH = '/api/v1'; // Esto es para ciertas rutas
+//  PATTERN DESING: CHAIN OF RESPONSABILITUY (Especificar cadenas de comportamientos que pueda tener esa ruta)
 
-export default (app: Application) => { // Sistema de rutas.
+export default (app: Application) => {
   
   const routes = () => {
     app.use(configenv.BASE_PATH!, authRoutes.routes());
